@@ -2,13 +2,13 @@
   "name": "free_lunch_day_backend_kitchen_service",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "app.js",
   "scripts": {
     "start": "nodemon -L ./src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Manuel Rivera",
   "license": "ISC",
   "dependencies": {
     "amqplib": "0.10.4",

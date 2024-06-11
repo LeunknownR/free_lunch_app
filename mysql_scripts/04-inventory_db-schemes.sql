@@ -10,25 +10,25 @@ CREATE TABLE IF NOT EXISTS ingredient(
 CREATE TABLE IF NOT EXISTS suply_history(
     id INT AUTO_INCREMENT NOT NULL,
     ingredient_id VARCHAR(20) NOT NULL,
-    recorded_at DATETIME NOT NULL,
+    supplied_on DATETIME NOT NULL,
 	PRIMARY KEY (id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredient(id)
 );
 
 -- DATA
 INSERT INTO ingredient(id, label, stock) VALUES
-    ('tomato', 'Tomate', 6),
-    ('lemon', 'Limón', 3),
-    ('potato', 'Papa', 12),
-    ('rice', 'Arroz', 4),
-    ('ketchup', 'Ketchup'),
-    ('lettuce', 'Lechuga', 6),
+    ('tomato', 'Tomate', 5),
+    ('lemon', 'Limón', 5),
+    ('potato', 'Papa', 15),
+    ('rice', 'Arroz', 5),
+    ('ketchup', 'Ketchup', 5),
+    ('lettuce', 'Lechuga', 5),
     ('onion', 'Cebolla', 5),
-    ('cheese', 'Queso', 3),
+    ('cheese', 'Queso', 5),
     ('meat', 'Carne', 5),
-    ('chicken', 'Pollo', 8);
+    ('chicken', 'Pollo', 5);
 
-INSERT INTO suply_history(ingredient_id, recorded_at) VALUES
+INSERT INTO suply_history(ingredient_id, supplied_on) VALUES
     ('lemon', "2024-06-08 09:50"),
     ('rice', "2024-06-08 13:02"),
     ('potato', "2024-06-08 15:47"),

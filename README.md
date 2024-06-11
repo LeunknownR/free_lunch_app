@@ -1,6 +1,6 @@
 # Free Lunch Day App
 
-## Marketplace Endpoint
+## Servicio de Marketplace
 
 https://recruitment.alegra.com/api/farmers-market/buy?ingredient=<ingredient>
 

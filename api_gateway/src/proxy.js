@@ -1,8 +1,29 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
 
+const { API_GATEWAY_URL } = process.env;
 /**
- * @param {string} target
+ * @param {Object} data
+ * @param {import("express").Application} data.app Express application
+ * @param {string} data.path Current path requested
+ * @param {string} data.target Address URL where the request will be redirected
  */
-export default function proxy(target) {
-	return createProxyMiddleware({ target, changeOrigin: true });
+export default function proxy({
+	app, path, target
+}) {
+	app.use(path, createProxyMiddleware({ 
+		target, 
+		changeOrigin: true, 
+		pathRewrite: {
+			[`^${path}`]: ""
+		},
+		on: {
+			error: (_, req, res) => {
+				const proxyRetry = createProxyMiddleware({
+					target: API_GATEWAY_URL,
+					changeOrigin: true
+				});
+				proxyRetry(req, res);
+			}
+		}
+	}));
 }

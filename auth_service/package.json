@@ -2,7 +2,7 @@
   "name": "free_lunch_day_backend_auth_service",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "app.js",
   "scripts": {
     "start": "nodemon -L ./src/app.js"

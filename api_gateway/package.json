@@ -8,7 +8,7 @@
     "start": "nodemon -L ./src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Manuel Rivera",
   "license": "ISC",
   "dependencies": {
     "express": "4.19.2",

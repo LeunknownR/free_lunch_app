@@ -2,13 +2,13 @@ import amqp from "amqplib"
 const CHAT_QUEUE = "CHAT";
 
 const {
-	RABBITMQ_PROTOCOL, RABBITMQ_PORT,
+	RABBITMQ_PORT,
 	RABBITMQ_HOSTNAME, RABBITMQ_VHOST,
 	RABBITMQ_USER, RABBITMQ_PASSWORD
 } = process.env;
 export default async function getQueueManager() {
 	const connection = await amqp.connect({
-		protocol: RABBITMQ_PROTOCOL,
+		protocol: "amqp",
 		hostname: RABBITMQ_HOSTNAME,
 		port: RABBITMQ_PORT,
 		username: RABBITMQ_USER,
