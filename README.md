@@ -1,4 +1,4 @@
-# Free Launch Day App
+# Free Lunch Day App
 
 ## Marketplace Endpoint
 
