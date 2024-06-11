@@ -1,0 +1,79 @@
+version: '3.1'
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    restart: unless-stopped
+    image: rabbitmq:3.10-rc-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASSWORD}
+    ports:
+      - ${RABBITMQ_AQMP_PORT}:${RABBITMQ_AQMP_PORT}
+      - ${RABBITMQ_GUI_MANAGER_PORT}:${RABBITMQ_GUI_MANAGER_PORT}
+    healthcheck:
+      test: "exit 0"
+
+  mysql:
+    container_name: mysql
+    restart: unless-stopped
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: ${MYSQL_USERNAME_ADMIN}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_ADMIN}
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    volumes:
+      - ./mysql_scripts:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:5.0.27
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME_ADMIN}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD_ADMIN}
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+    volumes:
+      - ./mongodb_scripts:/docker-entrypoint-initdb.d
+      - mongo_data:/data/db
+
+  ms1:
+    container_name: microservice_1
+    restart: unless-stopped
+    build: ./microservice_1
+    env_file:
+      - ./microservice_1/.env
+    environment:
+      - PORT=${MS1_PORT}
+    ports:
+      - ${MS1_PORT}:${MS1_PORT}
+    volumes:
+      - ./microservice_1:/usr/app
+      - ./microservice_1/node_modules:/usr/app/node_modules
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  ms2:
+    container_name: microservice_2
+    restart: unless-stopped
+    build: ./microservice_2
+    env_file:
+      - ./microservice_2/.env
+    environment:
+      - PORT=${MS2_PORT}
+    ports:
+      - ${MS2_PORT}:${MS2_PORT}
+    volumes:
+      - ./microservice_2:/usr/app
+      - ./microservice_2/node_modules:/usr/app/node_modules
+    depends_on:
+      mysql:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+        
+volumes:
+  mysql_data:
+  mongo_data:

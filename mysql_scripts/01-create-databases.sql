@@ -1,0 +1,4 @@
+USE mysql;
+
+CREATE DATABASE IF NOT EXISTS users_db;
+CREATE DATABASE IF NOT EXISTS inventory_db;

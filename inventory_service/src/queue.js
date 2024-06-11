@@ -1,0 +1,29 @@
+import amqp from "amqplib"
+const CHAT_QUEUE = "CHAT";
+
+const {
+	RABBITMQ_PORT,
+	RABBITMQ_HOSTNAME, RABBITMQ_VHOST,
+	RABBITMQ_USER, RABBITMQ_PASSWORD
+} = process.env;
+export default async function getQueueManager() {
+	const connection = await amqp.connect({
+		protocol: "amqp",
+		hostname: RABBITMQ_HOSTNAME,
+		port: RABBITMQ_PORT,
+		username: RABBITMQ_USER,
+		password: RABBITMQ_PASSWORD,
+		vhost: RABBITMQ_VHOST
+	});
+	const channel = await connection.createChannel();
+	await channel.assertQueue(CHAT_QUEUE);
+	return {
+		onMessage: handler => {
+			channel.consume(CHAT_QUEUE, data => {
+				const payload = JSON.parse(data.content);
+				handler(payload);
+				channel.ack(data);
+			});
+		}
+	};
+}

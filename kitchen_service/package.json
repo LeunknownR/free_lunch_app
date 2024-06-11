@@ -1,0 +1,21 @@
+{
+  "name": "free_lunch_day_backend_kitchen_service",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -L ./src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "0.10.4",
+		"mongoose": "8.2.3",
+    "express": "4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.3"
+  }
+}
