@@ -7,6 +7,7 @@ const {
 	AUTH_SERVICE_URL, 
 	KITCHEN_SERVICE_URL, 
 	INVENTORY_SERVICE_URL,
+	SUPPLY_SERVICE_URL,
 	PORT
 } = process.env;
 
@@ -24,6 +25,11 @@ proxy({
 	app, 
 	target: INVENTORY_SERVICE_URL, 
 	path: "/inventory"
+});
+proxy({
+	app, 
+	target: SUPPLY_SERVICE_URL, 
+	path: "/supply"
 });
 
 app.listen(PORT, () => {

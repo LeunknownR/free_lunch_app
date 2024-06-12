@@ -7,8 +7,9 @@ https://recruitment.alegra.com/api/farmers-market/buy?ingredient=<ingredient>
 ## Microservicios
 
 - Auth service.
-- Inventory service.
 - Kitchen service.
+- Inventory service.
+- Supply service
 
 ## Ingredientes
 
@@ -21,4 +22,9 @@ https://recruitment.alegra.com/api/farmers-market/buy?ingredient=<ingredient>
 - Cebolla: onion
 - Queso: cheese
 - Carne: meat
-- Pollo: chicken
+- Pollo: 
+
+
+## Notes
+
+* El puerto físico que se está usando para el contenedor de mongoose es el **27018**.
