@@ -1,9 +1,9 @@
 import IngredientId from "../domain/IngredientId";
 import SupplyHistoryRecord from "../domain/SupplyHistoryRecord";
-import SupplyingRepository from "../domain/SupplyingRepository";
+import SupplyRepository from "../domain/SupplyRepository";
 
 export default class GetSupplyHistoryUseCase {
-	constructor(private readonly repository: SupplyingRepository) {}
+	constructor(private readonly repository: SupplyRepository) {}
 	//#region Methods
 	async invoke(ingredientId: IngredientId): Promise<SupplyHistoryRecord[]> {
 		return await this.repository.getSupplyHistory(ingredientId);

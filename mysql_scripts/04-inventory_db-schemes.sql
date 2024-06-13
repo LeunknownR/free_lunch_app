@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS ingredient(
 INSERT INTO ingredient(id, label, stock) VALUES
     ('tomato', 'Tomate', 5),
     ('lemon', 'Limón', 5),
-    ('potato', 'Papa', 15),
+    ('potato', 'Papa', 5),
     ('rice', 'Arroz', 5),
     ('ketchup', 'Ketchup', 5),
     ('lettuce', 'Lechuga', 5),

@@ -3,12 +3,12 @@ import RecipeIngredientQuantity from "./RecipeIngredientQuantity";
 
 export default class RecipeIngredient {
 	constructor(
-		private readonly _ingredientId: IngredientId,
+		private readonly _id: IngredientId,
 		readonly quantity: RecipeIngredientQuantity
 	) {}
 	//#region Methods
-	get ingredientId(): string {
-		return this._ingredientId.value;
+	get id(): string {
+		return this._id.value;
 	}
 	//#endregion
 }

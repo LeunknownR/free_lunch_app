@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import cors from "cors";
 import routers from "./routers";
+import onMessageQueues from "./message_queues";
 
 const app: Application = express();
 
@@ -10,6 +11,8 @@ app.use(express.json({
 app.use(cors());
 
 app.use(routers);
+
+onMessageQueues();
 
 const { PORT } = process.env;
 app.listen(PORT, () => {

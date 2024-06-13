@@ -1,6 +1,6 @@
 import { Channel } from "amqplib";
 import MessageQueue, { MessageQueueConsumer } from "../../domain/MessageQueue";
-import RabbitMQManager from "../../../context/shared/message_queue/RabbitMQManager";
+import RabbitMQManager from "./RabbitMQManager";
 
 export default class RabbitMQQueue<D> implements MessageQueue<D> {
 	private constructor(

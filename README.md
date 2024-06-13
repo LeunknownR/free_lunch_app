@@ -6,7 +6,6 @@ https://recruitment.alegra.com/api/farmers-market/buy?ingredient=<ingredient>
 
 ## Microservicios
 
-- Auth service.
 - Kitchen service.
 - Inventory service.
 - Supply service

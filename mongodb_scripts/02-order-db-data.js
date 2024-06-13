@@ -70,15 +70,17 @@ db.createCollection("orders");
 // Dummie data
 db.orders.insertMany([
 	{
-		recipeId: 4,
+		_id: "21e18f60-022a-4be9-9309-033febe160e5",
+		recipe: 4,
 		issuedOn: new Date(2024, 5, 8, 12, 40),
-		//  values = "WAITING" | "IN_PROGRESS" | "FINALIZED"
-		status: "FINALIZED"
+		//  values = "IN_PROGRESS" | "DISPATCHED"
+		status: "DISPATCHED"
 	},
     {
-		recipeId: 5,
+		_id: "cf34813f-d15b-4d6a-85f5-972f3a209e9b",
+		recipe: 5,
 		issuedOn: new Date(2024, 5, 8, 17, 15),
-		status: "FINALIZED"
+		status: "DISPATCHED"
 	}
 ]);
 //#endregion

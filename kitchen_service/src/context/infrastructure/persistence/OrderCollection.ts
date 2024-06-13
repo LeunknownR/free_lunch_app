@@ -1,6 +1,7 @@
-export type OrderRecordStatus = "WAITING" | "IN_PROGRESS" | "FINALIZED";
+export type OrderRecordStatus = "IN_PROGRESS" | "DISPATCHED";
 export type OrderDocument = {
-	recipeId: number;
+	_id: string;
+	recipe: number;
 	issuedOn: Date;
 	status: OrderRecordStatus;
 };

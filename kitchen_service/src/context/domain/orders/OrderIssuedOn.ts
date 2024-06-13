@@ -7,6 +7,9 @@ export default class OrderIssuedOn {
 			throw new OrderError("Invalid order supplied on");
 		this.value = value;
 	}
+	static Issue(): OrderIssuedOn {
+		return new OrderIssuedOn(new Date());
+	}
 	private isPastOrToday(value: Date): boolean {
 		const today = new Date();
 		return value <= today;

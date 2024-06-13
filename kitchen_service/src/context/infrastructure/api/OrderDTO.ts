@@ -1,14 +1,22 @@
-import Order from "../../domain/orders/Order";
+import OrderSaved from "../../domain/orders/OrderSaved";
 
 export default class OrderDTO {
 	//#region Attributes
-	recipeId: number;
+	id: string;
+	recipe: {
+		id: number;
+		name: string;
+	};
 	issuedOn: Date;
 	status: string;
 	//#endregion
-	constructor(order: Order) {
-		this.recipeId = order.recipeId;
+	constructor(order: OrderSaved) {
+		this.id = order.id;
+		this.recipe = {
+			id: order.recipe.id,
+			name: order.recipe.name
+		};
 		this.issuedOn = order.issuedOn;
-		this.status = order.status.value;
+		this.status = order.status;
 	}
 }

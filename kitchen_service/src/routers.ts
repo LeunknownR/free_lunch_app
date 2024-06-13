@@ -1,7 +1,6 @@
 import { Router } from "express";
 import ServiceRouter from "./shared/infrastructure/api/ServiceRouter";
-import orderRouter from "./context/orders/infrastructure/api/order.router";
-import recipeRouter from "./context/recipes/infrastructure/api/order.router";
+import orderRouter from "./context/infrastructure/api/order.router";
 
 const router = Router();
 

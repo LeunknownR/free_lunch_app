@@ -3,12 +3,15 @@ import SupplyHistoryError from "./SupplyHistoryError";
 export default class IngredientSuppliedOn {
 	readonly value: Date;
 	constructor(value: Date) {
-		if (!this.isPastOrToday(value)) 
+		if (this.isFuture(value)) 
 			throw new SupplyHistoryError("Invalid supply history record supplied on");
 		this.value = value;
 	}
-	private isPastOrToday(value: Date): boolean {
+	static Issue(): IngredientSuppliedOn {
+		return new IngredientSuppliedOn(new Date());
+	}
+	private isFuture(value: Date): boolean {
 		const today = new Date();
-		return value <= today;
+		return value > today;
 	}
 }

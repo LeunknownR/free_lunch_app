@@ -1,18 +1,18 @@
 import { Connection, Model } from "mongoose";
-import { RecipeDocument } from "../../../context/orders/infrastructure/persistence/RecipeCollection";
-import { OrderDocument } from "../../../context/orders/infrastructure/persistence/OrderCollection";
 import MongoDBContext from "./MongoDBContext";
+import { RecipeDocument } from "../../../context/infrastructure/persistence/RecipeCollection";
+import { OrderDocument } from "../../../context/infrastructure/persistence/OrderCollection";
 
 const { MONGODB_ORDER_DATABASE } = process.env;
 export default class MongoDBOrderContext extends MongoDBContext {
 	//#region Attributes
-	readonly Recipes: Model<RecipeDocument>;
-	readonly Orders: Model<OrderDocument>;
+	readonly Recipe: Model<RecipeDocument>;
+	readonly Order: Model<OrderDocument>;
 	//#endregion
 	private constructor(connection: Connection) {
 		super(connection);
-		this.Recipes = this.getRecipeModel();
-		this.Orders = this.getOrderModel();
+		this.Recipe = this.getRecipeModel();
+		this.Order = this.getOrderModel();
 	}
 	//#endregion
 	//#region Methods
@@ -24,6 +24,10 @@ export default class MongoDBOrderContext extends MongoDBContext {
 	}
 	private getRecipeModel(): Model<RecipeDocument> {
 		return this.createModel<RecipeDocument>("recipes", {
+			_id: {
+				type: Number,
+				required: true,
+			},
 			name: {
 				type: String,
 				required: true,
@@ -36,9 +40,14 @@ export default class MongoDBOrderContext extends MongoDBContext {
 	}
 	private getOrderModel(): Model<OrderDocument> {
 		return this.createModel<OrderDocument>("orders", {
-			recipeId: {
-				type: Number,
+			_id: {
+				type: String,
 				required: true
+			},
+			recipe: {
+				type: Number,
+				ref: "recipes",
+				required: true,
 			},
 			issuedOn: {
 				type: Date,

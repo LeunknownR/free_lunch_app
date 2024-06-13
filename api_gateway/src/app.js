@@ -4,31 +4,25 @@ import proxy from "./proxy.js";
 const app = express();
 
 const {
-	AUTH_SERVICE_URL, 
-	KITCHEN_SERVICE_URL, 
+	KITCHEN_SERVICE_URL,
 	INVENTORY_SERVICE_URL,
 	SUPPLY_SERVICE_URL,
 	PORT
 } = process.env;
 
 proxy({
-	app, 
-	target: AUTH_SERVICE_URL, 
-	path: "/auth"
-});
-proxy({
-	app, 
-	target: KITCHEN_SERVICE_URL, 
+	app,
+	target: KITCHEN_SERVICE_URL,
 	path: "/kitchen"
 });
 proxy({
-	app, 
-	target: INVENTORY_SERVICE_URL, 
+	app,
+	target: INVENTORY_SERVICE_URL,
 	path: "/inventory"
 });
 proxy({
-	app, 
-	target: SUPPLY_SERVICE_URL, 
+	app,
+	target: SUPPLY_SERVICE_URL,
 	path: "/supply"
 });
 

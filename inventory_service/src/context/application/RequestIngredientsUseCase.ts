@@ -7,15 +7,19 @@ import RecipeIngredientQuantity from "../domain/RecipeIngredientQuantity";
 export default class RequestIngredientsUseCase {
 	constructor(private readonly repository: InventoryRepository) {}
 	//#region Methods
+	/**
+	 * @returns {RecipeIngredient[]} Returns recipe ingredients missing.
+	 */
 	async invoke(
 		recipeIngredients: RecipeIngredient[]
 	): Promise<RecipeIngredient[]> {
-		const inventoryIngredients =
-			await this.repository.findRecipeIngredients(recipeIngredients);
+		const inventoryIngredients = await this.findIngredients(
+			recipeIngredients
+		);
 		const recipeIngredientsMissing: RecipeIngredient[] = [];
 		recipeIngredients.forEach(recipeIngredient => {
 			const inventoryIngredient = inventoryIngredients.find(
-				({ id }) => id === recipeIngredient.ingredientId
+				({ id }) => id === recipeIngredient.id
 			);
 			const missingRecipe = this.takeAndDistribuiteIngredients(
 				recipeIngredient,
@@ -25,6 +29,14 @@ export default class RequestIngredientsUseCase {
 		});
 		await this.repository.updateIngredientStocks(inventoryIngredients);
 		return recipeIngredientsMissing;
+	}
+	private async findIngredients(
+		recipeIngredients: RecipeIngredient[]
+	): Promise<Ingredient[]> {
+		const ingredientIds = recipeIngredients.map(
+			recipeIngredient => new IngredientId(recipeIngredient.id)
+		);
+		return await this.repository.findIngredients(ingredientIds);
 	}
 	private takeAndDistribuiteIngredients(
 		recipeIngredient: RecipeIngredient,
@@ -37,7 +49,7 @@ export default class RequestIngredientsUseCase {
 		recipeIngredient.quantity.distribuite(existingQuantity);
 		if (missingQuantity === 0) return null;
 		return new RecipeIngredient(
-			new IngredientId(recipeIngredient.ingredientId),
+			new IngredientId(recipeIngredient.id),
 			new RecipeIngredientQuantity(missingQuantity)
 		);
 	}

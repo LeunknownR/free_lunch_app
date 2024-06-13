@@ -22,7 +22,9 @@ export default class IngredientStock {
 	take(value: number): number {
 		const newValue = this._value - value;
 		this._value = Math.max(0, newValue)
-		return Math.abs(newValue);
+		if (newValue < 0)
+			return Math.abs(newValue);
+		return 0;
 	}
 	//#endregion
 }

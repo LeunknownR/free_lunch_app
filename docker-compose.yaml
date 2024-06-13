@@ -1,17 +1,19 @@
 version: '3.1'
 services:
-  #rabbitmq:
-  #  container_name: rabbitmq
-  #  restart: unless-stopped
-  #  image: rabbitmq:3.10-rc-management-alpine
-  #  environment:
-  #    - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
-  #    - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASSWORD}
-  #  ports:
-  #    - ${RABBITMQ_AQMP_PORT}:${RABBITMQ_AQMP_PORT}
-  #    - ${RABBITMQ_GUI_MANAGER_PORT}:${RABBITMQ_GUI_MANAGER_PORT}
-  #  healthcheck:
-  #    test: "exit 0"
+  rabbitmq:
+    container_name: rabbitmq
+    restart: unless-stopped
+    image: rabbitmq:3.10-rc-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASSWORD}
+    ports:
+      - ${RABBITMQ_AQMP_PORT}:${RABBITMQ_AQMP_PORT}
+      - ${RABBITMQ_GUI_MANAGER_PORT}:${RABBITMQ_GUI_MANAGER_PORT}
+    networks:
+      - free_lunch_app
+    healthcheck:
+      test: "exit 0"
 
   mysql:
     container_name: mysql
@@ -77,6 +79,8 @@ services:
     depends_on:
       mongodb:
         condition: service_started
+      rabbitmq:
+        condition: service_healthy
 
   inventory_service:
     container_name: inventory_service
@@ -96,8 +100,8 @@ services:
     depends_on:
       mysql:
         condition: service_started
-    #  rabbitmq:
-    #    condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   supply_service:
     container_name: supply_service
@@ -117,6 +121,8 @@ services:
     depends_on:
       mysql:
         condition: service_started
+      rabbitmq:
+        condition: service_healthy
 
 networks:
   free_lunch_app:
