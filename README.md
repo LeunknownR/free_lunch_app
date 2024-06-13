@@ -1,29 +1,103 @@
 # Free Lunch Day App
 
-## Servicio de Marketplace
+Aplicación de gestión de una **jornada de almuerzos gratis**, construida utilizando una arquitectura de microservicios.
 
-https://recruitment.alegra.com/api/farmers-market/buy?ingredient=<ingredient>
+## Tecnologías utilizadas
 
-## Microservicios
+### Bases de datos
 
-- Kitchen service.
-- Inventory service.
-- Supply service
+* MySQL.
+* MongoDB.
 
-## Ingredientes
+### Entornos de ejecución
 
-- Tomate: tomato
-- Limón: lemon
-- Papa: potato
-- Arroz: rice
-- Ketchup: ketchup
-- Lechuga: lettuce
-- Cebolla: onion
-- Queso: cheese
-- Carne: meat
-- Pollo: 
+* Node JS.
+* Node JS con TypeScript.
 
+### Cola de mensajería
 
-## Notes
+* RabbitMQ.
 
-* El puerto físico que se está usando para el contenedor de mongoose es el **27018**.
+### Contenerización
+
+* Docker.
+* Docker Compose.
+
+### Librerías / Bibliotecas utilizadas
+
+* Driver para conectarse a bases de datos MongoDB: **mongoose**.
+* Driver para conectarse a bases de datos MySQL: **mysql2**.
+* Construcción de APIs. **express**.
+* Proxy: **http-proxy-middleware**.
+* Driver para conectarse a RabbitMQ: **ampqlib**.
+* Peticiones HTTP: **axios**.
+* Configuración de headers CORS: **cors**.
+* Hot reloading: **nodemon**.
+* Hot reloading con TypeScript: **ts-node-dev**.
+* Compilación de TypeScript: **typescript**.
+
+## Arquitectura de la aplicación
+
+Se considero separar el backend en 3 microservicios:
+
+* **Kitchen service:** Encargado de gestionar los pedidos de platos y guardar las recetas.
+
+* **Inventory service:** Encargado de gestionar el inventario de ingredientes.
+
+* **Supply service:** Encargado de gestionar el abastecimiento de ingredientes.
+
+![Diagrama de la arquitectura de la aplicación](./docs/free_lunch_day_app_diagram.jpg)
+
+### Descripción del proceso en pseudocódigo
+
+```txt
+
+* [KITCHEN_SERVICE]
+
++ GET /kitchen/orders/one
++ Obtener una receta aleatoria.
++ Crear order en estado IN_PROGRESS.
++ Enviar petición de ingredientes al INVENTORY_SERVICE.
+
+* [INVENTORY_SERVICE]
+
++ Buscar ingredientes en la base de datos.
+
+SI existe ENTONCES
+
+	+ Avisar al KITCHEN_SERVICE que los ingredientes han sido DISTRIBUIDOS.
+	
+SINO
+	+ Enviar petición de abastecimiento.
+	
+	* [SUPPLY_SERVICE]
+	
+	MIENTRAS (no se cumplan los requerimientos)
+		+ Pedir ingredientes a GET /farmers-market/buy
+		+ Guardar petición de abastecimiento en el historial.	
+
+	+ Avisar al microservicio de INVENTARIO que los ingredientes 	han sido ABASTECIDOS.
+
+	* [INVENTORY_SERVICE]
+
+	* Guardar cantidad sobrante de ingredientes.
+
+* [KITCHEN_SERVICE]
+
++ Cambiar estado de order a DISPATCHED.
+```
+
+## Instrucciones
+
+1. Construimos las imágenes.
+`
+docker-compuse build
+`
+2. Iniciamos los contenedores.
+`
+docker-compuse up
+`
+
+## Consideraciones
+
+* El puerto físico que se está mappeando para el contenedor de mongoose es el **27018**.
