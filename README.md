@@ -98,6 +98,11 @@ docker-compuse build
 docker-compuse up
 `
 
+## Documentación de servicios
+
+Documentación de servicios en Postman [Link de documentación en Postman](https://documenter.getpostman.com/view/14869061/2sA3XPE3ts).
+
+
 ## Consideraciones
 
 * El puerto físico que se está mappeando para el contenedor de mongoose es el **27018**.
