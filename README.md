@@ -25,6 +25,7 @@ Aplicación de gestión de una **jornada de almuerzos gratis**, construida utili
 
 ### Librerías / Bibliotecas utilizadas
 
+* Desarrollo frontend: **reactjs**.
 * Driver para conectarse a bases de datos MongoDB: **mongoose**.
 * Driver para conectarse a bases de datos MySQL: **mysql2**.
 * Construcción de APIs. **express**.

@@ -1,7 +1,7 @@
 {
   "name": "free_lunch_day_backend_inventory_service",
   "version": "1.0.0",
-  "description": "",
+  "description": "Microservicio de inventario.",
   "type": "commonjs",
   "main": "./dist/app.js",
   "scripts": {

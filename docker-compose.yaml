@@ -45,6 +45,18 @@ services:
       - ./mongodb_scripts:/docker-entrypoint-initdb.d
       - mongodb_data:/data/db
       
+  restaurant_frontend_app: 
+    container_name: restaurant_frontend_app
+    build: ./restaurant_frontend_app
+    volumes:
+      - ./:/app:cached
+    networks:
+      - free_lunch_app
+    ports:
+      - 3000:3000
+    command: npm run dev
+    tty: true
+  
   api_gateway:
     container_name: api_gateway
     restart: unless-stopped

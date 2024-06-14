@@ -1,7 +1,7 @@
 {
   "name": "free_lunch_day_backend_supply_service",
   "version": "1.0.0",
-  "description": "",
+  "description": "Microservicio de abastecimiento de ingredientes.",
   "type": "commonjs",
   "main": "./dist/app.js",
   "scripts": {

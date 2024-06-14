@@ -1,7 +1,7 @@
 {
   "name": "free_lunch_day_backend_kitchen_service",
   "version": "1.0.0",
-  "description": "",
+  "description": "Microservicio de cocina.",
   "type": "commonjs",
   "main": "./dist/app.js",
   "scripts": {
