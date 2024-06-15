@@ -8,4 +8,6 @@ RUN npm i
 
 COPY . .
 
-CMD ["npm", "start"]
+EXPOSE ${PORT}
+
+CMD ../share/docker/install.sh

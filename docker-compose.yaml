@@ -1,145 +1,142 @@
 version: '3.1'
 services:
-  rabbitmq:
-    container_name: rabbitmq
-    restart: unless-stopped
-    image: rabbitmq:3.10-rc-management-alpine
-    environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASSWORD}
-    ports:
-      - ${RABBITMQ_AQMP_PORT}:${RABBITMQ_AQMP_PORT}
-      - ${RABBITMQ_GUI_MANAGER_PORT}:${RABBITMQ_GUI_MANAGER_PORT}
-    networks:
-      - free_lunch_app
-    healthcheck:
-      test: "exit 0"
+  #rabbitmq:
+  #  container_name: rabbitmq
+  #  restart: unless-stopped
+  #  image: rabbitmq:3.10-rc-management-alpine
+  #  environment:
+  #    - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+  #    - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASSWORD}
+  #  ports:
+  #    - ${RABBITMQ_GUI_MANAGER_PORT}:${RABBITMQ_GUI_MANAGER_PORT}
+  #  networks:
+  #    - free_lunch_app
+  #  healthcheck:
+  #    test: "exit 0"
 
-  mysql:
-    container_name: mysql
-    restart: unless-stopped
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD_ROOT}
-      MYSQL_USER: ${MYSQL_USERNAME_ADMIN}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD_ADMIN}
-    ports:
-      - ${MYSQL_PORT}:${MYSQL_PORT}
-    networks:
-      - free_lunch_app
-    volumes:
-      - ./mysql_scripts:/docker-entrypoint-initdb.d
-      - mysql_data:/var/lib/mysql
+  #mysql:
+  #  container_name: mysql
+  #  restart: unless-stopped
+  #  image: mysql:5.7
+  #  environment:
+  #    MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD_ROOT}
+  #    MYSQL_USER: ${MYSQL_USERNAME_ADMIN}
+  #    MYSQL_PASSWORD: ${MYSQL_PASSWORD_ADMIN}
+  #  ports:
+  #    - ${MYSQL_PORT}:${MYSQL_PORT}
+  #  networks:
+  #    - free_lunch_app
+  #  volumes:
+  #    - ./mysql_scripts:/docker-entrypoint-initdb.d
+  #    - mysql_data:/var/lib/mysql
 
-  mongodb:
-    container_name: mongodb
-    image: mongo:5.0.27
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME_ADMIN}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD_ADMIN}
-    ports:
-      - ${MONGODB_PHYSICAL_PORT}:${MONGODB_PORT}
-    networks:
-      - free_lunch_app
-    volumes:
-      - ./mongodb_scripts:/docker-entrypoint-initdb.d
-      - mongodb_data:/data/db
+  #mongodb:
+  #  container_name: mongodb
+  #  image: mongo:5.0.27
+  #  environment:
+  #    MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME_ADMIN}
+  #    MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD_ADMIN}
+  #  ports:
+  #    - ${MONGODB_HOST_PORT}:${MONGODB_PORT}
+  #  networks:
+  #    - free_lunch_app
+  #  volumes:
+  #    - ./mongodb_scripts:/docker-entrypoint-initdb.d
+  #    - mongodb_data:/data/db
       
   restaurant_frontend_app: 
     container_name: restaurant_frontend_app
     build: ./restaurant_frontend_app
-    volumes:
-      - ./:/app:cached
+    ports:
+      - ${RESTAURANT_FRONTEND_APP_PORT}:${RESTAURANT_FRONTEND_APP_PORT}
     networks:
       - free_lunch_app
-    ports:
-      - 3000:3000
-    command: npm run dev
-    tty: true
+    volumes:
+      - ./restaurant_frontend_app:/usr/app
+      - ./restaurant_frontend_app/node_modules:/usr/app/node_modules
+      - ./shared:/usr/share/docker
   
-  api_gateway:
-    container_name: api_gateway
-    restart: unless-stopped
-    build: ./api_gateway
-    env_file:
-      - ./api_gateway/.env
-    environment:
-      - PORT=${API_GATEWAY_PORT}
-    ports:
-      - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
-    networks:
-      - free_lunch_app
-    volumes:
-      - ./api_gateway:/usr/app
-      - ./api_gateway/node_modules:/usr/app/node_modules
+  #api_gateway:
+  #  container_name: api_gateway
+  #  restart: unless-stopped
+  #  build: ./api_gateway
+  #  env_file:
+  #    - ./api_gateway/.env
+  #  environment:
+  #    - PORT=${API_GATEWAY_PORT}
+  #  ports:
+  #    - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
+  #  networks:
+  #    - free_lunch_app
+  #  volumes:
+  #    - ./shared:/usr/share/docker
+  #    - ./api_gateway:/usr/app
+  #    - ./api_gateway/node_modules:/usr/app/node_modules
 
-  kitchen_service:
-    container_name: kitchen_service
-    restart: unless-stopped
-    build: ./kitchen_service
-    env_file:
-      - ./kitchen_service/.env
-    environment:
-      - PORT=${KITCHEN_SERVICE_PORT}
-    ports:
-      - ${KITCHEN_SERVICE_PORT}:${KITCHEN_SERVICE_PORT}
-    networks:
-      - free_lunch_app
-    volumes:
-      - ./kitchen_service:/usr/app
-      - ./kitchen_service/node_modules:/usr/app/node_modules
-    depends_on:
-      mongodb:
-        condition: service_started
-      rabbitmq:
-        condition: service_healthy
+  #kitchen_service:
+  #  container_name: kitchen_service
+  #  restart: unless-stopped
+  #  build: ./kitchen_service
+  #  env_file:
+  #    - ./kitchen_service/.env
+  #  environment:
+  #    - PORT=${KITCHEN_SERVICE_PORT}
+  #  networks:
+  #    - free_lunch_app
+  #  volumes:
+  #    - ./shared:/usr/share/docker
+  #    - ./kitchen_service:/usr/app
+  #    - ./kitchen_service/node_modules:/usr/app/node_modules
+  #  depends_on:
+  #    mongodb:
+  #      condition: service_started
+  #    rabbitmq:
+  #      condition: service_healthy
 
-  inventory_service:
-    container_name: inventory_service
-    restart: unless-stopped
-    build: ./inventory_service
-    env_file:
-      - ./inventory_service/.env
-    environment:
-      - PORT=${INVENTORY_SERVICE_PORT}
-    ports:
-      - ${INVENTORY_SERVICE_PORT}:${INVENTORY_SERVICE_PORT}
-    volumes:
-      - ./inventory_service:/usr/app
-      - ./inventory_service/node_modules:/usr/app/node_modules
-    networks:
-      - free_lunch_app
-    depends_on:
-      mysql:
-        condition: service_started
-      rabbitmq:
-        condition: service_healthy
+  #inventory_service:
+  #  container_name: inventory_service
+  #  restart: unless-stopped
+  #  build: ./inventory_service
+  #  env_file:
+  #    - ./inventory_service/.env
+  #  environment:
+  #    - PORT=${INVENTORY_SERVICE_PORT}
+  #  volumes:
+  #    - ./shared:/usr/share/docker
+  #    - ./inventory_service:/usr/app
+  #    - ./inventory_service/node_modules:/usr/app/node_modules
+  #  networks:
+  #    - free_lunch_app
+  #  depends_on:
+  #    mysql:
+  #      condition: service_started
+  #    rabbitmq:
+  #      condition: service_healthy
 
-  supply_service:
-    container_name: supply_service
-    restart: unless-stopped
-    build: ./supply_service
-    env_file:
-      - ./supply_service/.env
-    environment:
-      - PORT=${SUPPLY_SERVICE_PORT}
-    ports:
-      - ${SUPPLY_SERVICE_PORT}:${SUPPLY_SERVICE_PORT}
-    volumes:
-      - ./supply_service:/usr/app
-      - ./supply_service/node_modules:/usr/app/node_modules
-    networks:
-      - free_lunch_app
-    depends_on:
-      mysql:
-        condition: service_started
-      rabbitmq:
-        condition: service_healthy
+  #supply_service:
+  #  container_name: supply_service
+  #  restart: unless-stopped
+  #  build: ./supply_service
+  #  env_file:
+  #    - ./supply_service/.env
+  #  environment:
+  #    - PORT=${SUPPLY_SERVICE_PORT}
+  #  volumes:
+  #    - ./shared:/usr/share/docker
+  #    - ./supply_service:/usr/app
+  #    - ./supply_service/node_modules:/usr/app/node_modules
+  #  networks:
+  #    - free_lunch_app
+  #  depends_on:
+  #    mysql:
+  #      condition: service_started
+  #    rabbitmq:
+  #      condition: service_healthy
 
 networks:
   free_lunch_app:
     driver: bridge
 
-volumes:
-  mysql_data:
-  mongodb_data:
+#volumes:
+#  mysql_data:
+#  mongodb_data:
