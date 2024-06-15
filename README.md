@@ -92,11 +92,11 @@ SINO
 
 1. Construimos las imágenes.
 `
-docker-compuse build
+docker-compose build
 `
 2. Iniciamos los contenedores.
 `
-docker-compuse up
+docker-compose up
 `
 
 ## Documentación de servicios
