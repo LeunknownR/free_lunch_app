@@ -4,6 +4,7 @@ import IngredientLabel from "../../domain/IngredientLabel";
 import IngredientStock from "../../domain/IngredientStock";
 import InventoryRepository from "../../domain/InventoryRepository";
 import MySqlContext from "../../../shared/infrastructure/persistence/MySqlContext";
+import IngredientImage from "../../domain/IngredientImage";
 
 export default class MySqlInventoryRepository implements InventoryRepository {
 	constructor(private readonly inventoryDatabase: MySqlContext) {}
@@ -12,6 +13,7 @@ export default class MySqlInventoryRepository implements InventoryRepository {
 		return new Ingredient(
 			new IngredientId(record["id"]),
 			new IngredientLabel(record["label"]),
+			new IngredientImage(record["image"]),
 			new IngredientStock(record["stock"])
 		);
 	}

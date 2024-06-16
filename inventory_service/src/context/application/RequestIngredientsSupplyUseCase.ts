@@ -2,8 +2,8 @@ import IngredientId from "../domain/IngredientId";
 import InventoryRepository from "../domain/InventoryRepository";
 import OrderId from "../domain/OrderId";
 import RecipeIngredient from "../domain/RecipeIngredient";
+import IngredientQueueData from "../domain/queue_data/IngredientQueueData";
 import {
-	IngredientQueueData,
 	SupplyIngredientQueue,
 } from "../domain/queue_data/SupplyIngredientQueueData";
 
@@ -25,7 +25,6 @@ export default class RequestIngredientsSupplyUseCase {
 			);
 		const ingredientsToSupply: IngredientQueueData[] = inventoryIngredients.map(inventoryIngredient => ({
 			id: inventoryIngredient.id,
-			label: inventoryIngredient.label,
 			quantity: recipeIngredients.find(
 				({ id: ingredientId }) =>
 					ingredientId === inventoryIngredient.id

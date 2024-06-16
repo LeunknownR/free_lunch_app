@@ -29,7 +29,7 @@ router.get("/", async (_, res) => {
 	});
 });
 
-router.get("/one", async (_, res) => {
+router.post("/", async (_, res) => {
 	try {
 		const orderDatabase = await MongoDBContextProvider.getOrderDatabase();
 		const getOneRecipeUseCase = new GetOneRecipeUseCase(
@@ -54,7 +54,6 @@ router.get("/one", async (_, res) => {
 		});
 	}
 	catch (err) {
-		console.log(err);
 		res.status(500).json({
 			data: null,
 			message: "ERROR",

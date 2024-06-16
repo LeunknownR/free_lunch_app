@@ -1,7 +1,7 @@
 import onRequestIngredientQueue from "./context/infrastructure/message_queue/request_ingredients.queue";
-import onSupplyIngredientQueue from "./context/infrastructure/message_queue/supply_ingredients.queue";
+import onIngredientSuppliedQueue from "./context/infrastructure/message_queue/ingredient_supplied.queue";
 
 export default async function onMessageQueues() {
 	await onRequestIngredientQueue();
-	await onSupplyIngredientQueue();
+	await onIngredientSuppliedQueue();
 }

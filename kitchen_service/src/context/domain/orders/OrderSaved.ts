@@ -1,4 +1,3 @@
-import Recipe from "../recipes/Recipe";
 import OrderId from "./OrderId";
 import OrderIssuedOn from "./OrderIssuedOn";
 import OrderStatus from "./OrderStatus";

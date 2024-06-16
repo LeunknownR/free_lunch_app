@@ -32,6 +32,14 @@ export default class MongoDBOrderContext extends MongoDBContext {
 				type: String,
 				required: true,
 			},
+			description: {
+				type: String,
+				required: true
+			},
+			image: {
+				type: String,
+				required: true
+			},
 			ingredients: {
 				type: [String],
 				required: true,

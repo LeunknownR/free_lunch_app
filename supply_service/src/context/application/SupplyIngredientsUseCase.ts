@@ -4,7 +4,6 @@ import Ingredient from "../domain/Ingredient";
 import SupplyRepository from "../domain/SupplyRepository";
 import IngredientQuantity from "../domain/IngredientQuantity";
 import SupplyHistoryRecord from "../domain/SupplyHistoryRecord";
-import IngredientLabel from "../domain/IngredientLabel";
 
 const { MARKETPLACE_SERVICE_URL } = process.env;
 type MarketPlaceServiceResponseData = {
@@ -18,7 +17,7 @@ export default class SupplyIngredientsUseCase {
 	//#region Methods
 	async invoke(ingredientsRequested: Ingredient[]): Promise<Ingredient[]> {
 		const leftOverIngredients: Ingredient[] = [];
-		const promises = ingredientsRequested.map<Promise<void>>(
+		const boughts = ingredientsRequested.map<Promise<void>>(
 			async ingredient => {
 				const leftOverIngredient = await this.attendIngredientOrder(
 					ingredient
@@ -27,7 +26,7 @@ export default class SupplyIngredientsUseCase {
 					leftOverIngredients.push(leftOverIngredient);
 			}
 		);
-		await Promise.all(promises);
+		await Promise.all(boughts);
 		return leftOverIngredients;
 	}
 	private async attendIngredientOrder(
@@ -35,12 +34,13 @@ export default class SupplyIngredientsUseCase {
 	): Promise<Ingredient | null> {
 		let i = 0;
 		while (true) {
-			i++;
 			if (i === 20) 
-				throw new Error("El while no termina :C");
+				throw new Error("While not finish");
 			const quantitySold = await this.buyIngredients(
 				ingredient.id
 			);
+			if (quantitySold === 0) 
+				return;
 			this.recordSupply(ingredient, quantitySold);
 			const leftOverQuantity = ingredient.quantity.supply(quantitySold);
 			if (leftOverQuantity > 0)
@@ -51,9 +51,8 @@ export default class SupplyIngredientsUseCase {
 	private recordSupply(ingredient: Ingredient, quantitySold: number): void {
 		// Nota: No hace falta esperar que termine para el proceso
 		this.supplyRepository.recordSupply(
-			SupplyHistoryRecord.Record(
+			SupplyHistoryRecord.Create(
 				new IngredientId(ingredient.id),
-				new IngredientLabel(ingredient.label),
 				new IngredientQuantity(quantitySold)
 			)
 		);
@@ -64,7 +63,6 @@ export default class SupplyIngredientsUseCase {
 	): Ingredient {
 		return new Ingredient(
 			new IngredientId(ingredient.id),
-			new IngredientId(ingredient.label),
 			new IngredientQuantity(leftOverQuantity)
 		);
 	}

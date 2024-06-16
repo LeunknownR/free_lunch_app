@@ -1,10 +1,6 @@
 import MessageQueue from "../../shared/domain/MessageQueue";
+import IngredientQueueData from "./IngredientQueueData";
 
-export type IngredientQueueData = {
-	id: string;
-	label: string;
-	quantity: number;
-};
 export type SupplyIngredientQueueData = {
 	orderId: string;
 	ingredients: IngredientQueueData[];

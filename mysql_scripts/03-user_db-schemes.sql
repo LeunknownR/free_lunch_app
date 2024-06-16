@@ -10,6 +10,6 @@ CREATE TABLE IF NOT EXISTS user(
 );
 
 INSERT INTO user(username, password, name, surname) VALUES(
-	'mrivera', '$2a$12$fOyrzYr2vB/P/V1u89Rr1.LKOTFqCFMaz/nCHQg9hgGxqUdp9IlIq', 'Manuel', 'Rivera'
+	'mrivera', '$2a$12$FZ5RzS5IYn280VRLW3GHUu9EuL4eJJL2oneICSSjn5jeUCS1rSjB6', 'Manuel', 'Rivera'
 	-- password = Mrivera_123
 );

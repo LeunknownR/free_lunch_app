@@ -39,7 +39,9 @@ Aplicación de gestión de una **jornada de almuerzos gratis**, construida utili
 
 ## Arquitectura de la aplicación
 
-Se considero separar el backend en 3 microservicios:
+Se considero separar el backend en 4 microservicios:
+
+* **Auth service:** Encargado de la autenticación.
 
 * **Kitchen service:** Encargado de gestionar los pedidos de platos y guardar las recetas.
 
@@ -51,11 +53,30 @@ Se considero separar el backend en 3 microservicios:
 
 ### Descripción del proceso en pseudocódigo
 
+* Login de usuarios.
+
 ```txt
+* [AUTH_SERVICE]
+
+POST /auth/login
+
+[AUTH_SERVICE]
+
+SI (los ingredientes existe) ENTONCES
+	+ Devuelve el token y los datos del usuario.
+SINO
+	+ Devuelve un código de error para dar feedback al usuario.
+
+```
+
+* Pedido de nuevo plato.
+
+```txt
+
++ GET /kitchen/orders
 
 * [KITCHEN_SERVICE]
 
-+ GET /kitchen/orders/one
 + Obtener una receta aleatoria.
 + Crear order en estado IN_PROGRESS.
 + Enviar petición de ingredientes al INVENTORY_SERVICE.
@@ -64,7 +85,7 @@ Se considero separar el backend en 3 microservicios:
 
 + Buscar ingredientes en la base de datos.
 
-SI existe ENTONCES
+SI (los ingredientes existe) ENTONCES
 
 	+ Avisar al KITCHEN_SERVICE que los ingredientes han sido DISTRIBUIDOS.
 	

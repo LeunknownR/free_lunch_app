@@ -8,7 +8,7 @@ import IngredientSuppliedQuantity from "../../domain/IngredientSuppliedQuantity"
 import DistributeIngredientsUseCase from "../../application/DistributeIngredientsUseCase";
 import OrderId from "../../domain/OrderId";
 
-export default async function onSupplyIngredientQueue() {
+export default async function onIngredientSuppliedQueue() {
 	const queueContext = await QueueContext.getInstance();
 	queueContext.ingredientSuppliedQueue.on(async data => {
 		const { orderId, leftOverIngredients } = data;

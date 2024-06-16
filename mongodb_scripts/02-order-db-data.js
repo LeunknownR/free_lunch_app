@@ -3,65 +3,77 @@ db = db.getSiblingDB("OrderDatabase");
 //#region Recipes
 db.createCollection("recipes");
 db.recipes.insertMany([
-	{
-		_id: 1,
-		name: "Causa peruana",
-		ingredients: [
-			{ id: "potato", quantity: 3 },
-			{ id: "lemon", quantity: 5 },
-			{ id: "lettuce", quantity: 1 },
-			{ id: "chicken", quantity: 1 }
-		]
-	},
     {
-		_id: 2,
-		name: "Puré de papas",
-		ingredients: [
-			{ id: "potato", quantity: 4 },
-			{ id: "rice", quantity: 1 },
-			{ id: "meat", quantity: 1 }
-		]
-	},
+        _id: 1,
+        name: "Causa peruana",
+        description: "Un plato típico peruano hecho a base de puré de papa amarilla, limón, lechuga y pollo desmenuzado.",
+		image: "causa_peruana.jpg",
+        ingredients: [
+            { id: "potato", name: "Papa", quantity: 3 },
+            { id: "lemon", name: "Limón", quantity: 5 },
+            { id: "lettuce", name: "Lechuga", quantity: 1 },
+            { id: "chicken", name: "Pollo", quantity: 1 }
+        ]
+    },
     {
-		_id: 3,
-		name: "Arroz con pollo",
-		ingredients: [
-			{ id: "rice", quantity: 1 },
-			{ id: "chicken", quantity: 1 },
-			{ id: "tomato", quantity: 2 },
-			{ id: "onion", quantity: 2 }
-		]
-	},
+        _id: 2,
+        name: "Puré de papas",
+        description: "Un acompañamiento clásico compuesto de puré de papas, acompañado de arroz y carne.",
+		image: "pure_de_papas.jpg",
+        ingredients: [
+            { id: "potato", name: "Papa", quantity: 4 },
+            { id: "rice", name: "Arroz", quantity: 1 },
+            { id: "meat", name: "Carne", quantity: 1 }
+        ]
+    },
     {
-		_id: 4,
-		name: "Lomo saltado",
-		ingredients: [
-			{ id: "tomato", quantity: 1 },
-			{ id: "onion", quantity: 2 },
-			{ id: "meat", quantity: 2 },
-			{ id: "potato", quantity: 4 },
-			{ id: "rice", quantity: 1 }
-		]
-	},
+        _id: 3,
+        name: "Arroz con pollo",
+        description: "Un plato popular que combina arroz cocido con pollo, tomate y cebolla.",
+		image: "arroz_con_pollo.jpg",
+        ingredients: [
+            { id: "rice", name: "Arroz", quantity: 1 },
+            { id: "chicken", name: "Pollo", quantity: 1 },
+            { id: "tomato", name: "Tomate", quantity: 2 },
+            { id: "onion", name: "Cebolla", quantity: 2 }
+        ]
+    },
     {
-		_id: 5,
-		name: "Papa a la huancaína",
-		ingredients: [
-			{ id: "potato", quantity: 5 },
-			{ id: "cheese", quantity: 2 }
-		]
-	},
+        _id: 4,
+        name: "Lomo saltado",
+        description: "Un plato peruano que mezcla tiras de carne de res salteadas con tomate, cebolla, papas fritas y se sirve con arroz.",
+		image: "lomo_saltado.jpg",
+        ingredients: [
+            { id: "tomato", name: "Tomate", quantity: 1 },
+            { id: "onion", name: "Cebolla", quantity: 2 },
+            { id: "meat", name: "Carne", quantity: 2 },
+            { id: "potato", name: "Papa", quantity: 4 },
+            { id: "rice", name: "Arroz", quantity: 1 }
+        ]
+    },
     {
-		_id: 6,
-		name: "Pollo broaster",
-		ingredients: [
-			{ id: "chicken", quantity: 2 },
-			{ id: "potato", quantity: 4 },
-			{ id: "lettuce", quantity: 2 },
-			{ id: "tomato", quantity: 1 },
-			{ id: "ketchup", quantity: 1 }
-		]
-	}
+        _id: 5,
+        name: "Papa a la huancaína",
+        description: "Papas cocidas cubiertas con una salsa cremosa de queso, conocida como salsa huancaína.",
+		image: "papa_a_la_huancaina.jpg",
+        ingredients: [
+            { id: "potato", name: "Papa", quantity: 5 },
+            { id: "cheese", name: "Queso", quantity: 2 }
+        ]
+    },
+    {
+        _id: 6,
+        name: "Pollo broaster",
+        description: "Pollo frito estilo broaster, servido con papas fritas, lechuga, tomate y ketchup.",
+		image: "pollo_broaster.jpg",
+        ingredients: [
+            { id: "chicken", name: "Pollo", quantity: 2 },
+            { id: "potato", name: "Papa", quantity: 4 },
+            { id: "lettuce", name: "Lechuga", quantity: 2 },
+            { id: "tomato", name: "Tomate", quantity: 1 },
+            { id: "ketchup", name: "Ketchup", quantity: 1 }
+        ]
+    }
 ]);
 //#endregion
 

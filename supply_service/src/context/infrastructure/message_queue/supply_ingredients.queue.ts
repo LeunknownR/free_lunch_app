@@ -8,7 +8,6 @@ import MySqlContextProvider from "../../shared/infrastructure/persistence/MySqlC
 import MySqlSupplyRepository from "../persistence/MySqlSupplyRepository";
 import NotifyIngredientSuppliedUseCase from "../../application/NotifyIngredientSuppliedUseCase";
 import OrderId from "../../domain/OrderId";
-import IngredientLabel from "../../domain/IngredientLabel";
 
 export default async function onSupplyIngredientQueue() {
 	const queueContext = await QueueContext.getInstance();
@@ -18,10 +17,9 @@ export default async function onSupplyIngredientQueue() {
 			new MySqlSupplyRepository(MySqlContextProvider.getSupplyDatabase())
 		);
 		const ingredientsRequested = data.ingredients.map(
-			({ id, label, quantity }) =>
+			({ id, quantity }) =>
 				new Ingredient(
 					new IngredientId(id),
-					new IngredientLabel(label),
 					new IngredientQuantity(quantity)
 				)
 		);

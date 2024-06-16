@@ -4,11 +4,13 @@ export default class IngredientDTO {
 	//#region Attributes
 	id: string;
 	label: string;
+	image: string;
 	stock: number;
 	//#endregion
 	constructor(ingredient: Ingredient) {
 		this.id = ingredient.id;
 		this.label = ingredient.label;
+		this.image = ingredient.image;
 		this.stock = ingredient.stock.value;
 	}
 }

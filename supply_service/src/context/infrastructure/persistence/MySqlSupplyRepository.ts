@@ -1,6 +1,5 @@
 import MySqlContext from "../../../shared/infrastructure/persistence/MySqlContext";
 import IngredientId from "../../domain/IngredientId";
-import IngredientLabel from "../../domain/IngredientLabel";
 import IngredientQuantity from "../../domain/IngredientQuantity";
 import IngredientSuppliedOn from "../../domain/IngredientSuppliedOn";
 import SupplyHistoryRecord from "../../domain/SupplyHistoryRecord";
@@ -20,7 +19,6 @@ export default class MySqlSupplyRepository implements SupplyRepository {
 				new SupplyHistoryRecord(
 					new SupplyHistoryRecordId(record["id"]),
 					new IngredientId(record["ingredient_id"]),
-					new IngredientLabel(record["ingredient_label"]),
 					new IngredientQuantity(record["quantity"]),
 					new IngredientSuppliedOn(record["supplied_on"])
 				)
@@ -29,10 +27,10 @@ export default class MySqlSupplyRepository implements SupplyRepository {
 	async recordSupply(
 		supplyHistoryRecord: SupplyHistoryRecord
 	): Promise<void> {
-		const { id, ingredientId, ingredientLabel, quantity, suppliedOn } = supplyHistoryRecord;
+		const { id, ingredientId, quantity, suppliedOn } = supplyHistoryRecord;
 		this.supplyDatabase.query(
-			"INSERT INTO supply_history(id, ingredient_id, ingredient_label, quantity, supplied_on) VALUES (?, ?, ?, ?, ?);",
-			[id, ingredientId, ingredientLabel, quantity.value, suppliedOn]
+			"INSERT INTO supply_history(id, ingredient_id, quantity, supplied_on) VALUES (?, ?, ?, ?, ?);",
+			[id, ingredientId, quantity.value, suppliedOn]
 		);
 	}
 	//#endregion
