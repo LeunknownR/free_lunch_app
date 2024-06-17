@@ -14,4 +14,4 @@ COPY . .
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ../share/docker/install.sh
+CMD chmod +x ../share/docker/install.sh && ../share/docker/install.sh

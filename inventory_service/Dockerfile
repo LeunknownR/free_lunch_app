@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE ${PORT}
 
-CMD ../share/docker/install.sh
+CMD chmod +x ../share/docker/install.sh && ../share/docker/install.sh
