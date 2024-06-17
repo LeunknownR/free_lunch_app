@@ -4,6 +4,10 @@ Aplicación de gestión de una **jornada de almuerzos gratis**, construida utili
 
 ## Tecnologías utilizadas
 
+## Diseño UI
+
+* Figma.
+
 ### Bases de datos
 
 * MySQL.
