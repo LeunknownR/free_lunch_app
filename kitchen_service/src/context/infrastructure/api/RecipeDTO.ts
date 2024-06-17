@@ -2,6 +2,7 @@ import Recipe from "../../domain/recipes/Recipe";
 
 type RecipeIngredientDTO = {
 	id: string;
+	label: string;
 	quantity: number;
 };
 export default class RecipeDTO {
@@ -19,6 +20,7 @@ export default class RecipeDTO {
 		this.image = recipe.image;
 		this.ingredients = recipe.ingredients.map(ingredient => ({
 			id: ingredient.id,
+			label: ingredient.label,
 			quantity: ingredient.quantity
 		}));
 	}

@@ -1,6 +1,6 @@
-import { Connection, Model } from "mongoose";
+import { Connection, Model, Schema } from "mongoose";
 import MongoDBContext from "./MongoDBContext";
-import { RecipeDocument } from "../../../context/infrastructure/persistence/RecipeCollection";
+import { Ingredient, RecipeDocument } from "../../../context/infrastructure/persistence/RecipeCollection";
 import { OrderDocument } from "../../../context/infrastructure/persistence/OrderCollection";
 
 const { MONGODB_ORDER_DATABASE } = process.env;
@@ -41,7 +41,20 @@ export default class MongoDBOrderContext extends MongoDBContext {
 				required: true
 			},
 			ingredients: {
-				type: [String],
+				type: [{
+					id: {
+						type: String,
+						required: true
+					},
+					label: {
+						type: String,
+						required: true
+					},
+					quantity: {
+						type: Number,
+						required: true
+					}
+				}],
 				required: true,
 			},
 		});

@@ -1,4 +1,5 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
+import { checkToken } from "./auth.js";
 
 const { API_GATEWAY_URL } = process.env;
 
@@ -11,14 +12,15 @@ function getProxyRetry() {
 const proxyRetry = getProxyRetry();
 /**
  * @param {Object} data
- * @param {import("express").Application} data.app Express application
- * @param {string} data.path Current path requested
- * @param {string} data.target Address URL where the request will be redirected
+ * @param {import("express").Application} data.app Express application.
+ * @param {string} data.path Current path requested.
+ * @param {string} data.target Address URL where the request will be redirected.
+ * @param {string} data.isAuthenticated It's an authenticated route.
  */
 export default function proxy({
-	app, path, target
+	app, path, target, isAuthenticated
 }) {
-	app.use(path, createProxyMiddleware({ 
+	const proxyMiddleware = createProxyMiddleware({ 
 		target, 
 		changeOrigin: true, 
 		pathRewrite: {
@@ -31,5 +33,7 @@ export default function proxy({
 					proxyRetry(req, res);
 			}
 		}
-	}));
+	});
+	if (isAuthenticated) app.use(path, checkToken, proxyMiddleware);
+	else app.use(path, proxyMiddleware);
 }

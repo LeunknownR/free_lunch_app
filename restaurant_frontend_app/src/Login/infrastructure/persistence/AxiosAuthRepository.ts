@@ -9,8 +9,8 @@ export default class AxiosAuthRepository implements AuthRepository {
 	//#region Methods
 	async login(user: UserLogin): Promise<LoginResponse> {
 		const { status, payload } = await this.httpRequest.post<
-			UserLogin,
-			BackendAPIResult<LoginResponse>
+			BackendAPIResult<LoginResponse>,
+			UserLogin
 		>("/auth/login", user);
 		if (status !== 200) throw new HttpRequestError(payload.message);
 		return payload.data;

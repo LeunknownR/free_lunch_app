@@ -1,4 +1,5 @@
 import MongoDBContextProvider from "../../../shared/infrastructure/persistence/MongoDBContextProvider";
+import SocketIoServer from "../../../shared/infrastructure/websockets/SocketIoServer";
 import DispatchOrderUseCase from "../../application/DispatchOrderUseCase";
 import OrderId from "../../domain/orders/OrderId";
 import QueueContext from "../../shared/message_queue/QueueContext";
@@ -9,7 +10,10 @@ export default async function onIngredientDistribuitedQueue() {
 	queueContext.ingredientsDistributedQueue.on(async data => {
 		const orderId = new OrderId(data.orderId);
 		const orderDatabase = await MongoDBContextProvider.getOrderDatabase();
-		const dispatchOrderUseCase = new DispatchOrderUseCase(new MongoDBOrderRepository(orderDatabase));
+		const dispatchOrderUseCase = new DispatchOrderUseCase(
+			new MongoDBOrderRepository(orderDatabase),
+			SocketIoServer.getInstance()
+		);
 		dispatchOrderUseCase.invoke(orderId);
 	});
 }

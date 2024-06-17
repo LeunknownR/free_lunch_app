@@ -16,10 +16,14 @@ import HttpRequestError from "../shared/domain/HttpRequestError";
 import { AUTH_LOGIN_ERRORS } from "./constants";
 import { LoginCard } from "./styles";
 import CenteredLayout from "../layout/CenteredLayout";
+import UserIcon from "../icons/UserIcon";
+import Preloader from "../components/Preloader";
+import usePreloader from "../components/Preloader/hooks/usePreloader";
 
 const authRepository = RepositoryProvider.getAuthRepository();
 const LoginView = () => {
 	useTitle("Login");
+	const preloader = usePreloader();
 	const loginForm = useLoginForm();
 	const errorLoginForm = useErrorMessage();
 	const navigate = useNavigate();
@@ -41,10 +45,14 @@ const LoginView = () => {
 	async function login(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		try {
+			preloader.show();
 			const loginResponse = await authRepository.login(loginForm.value);
 			startUserSession(loginResponse);
 		} catch (error) {
 			errorLoginForm.set(AUTH_LOGIN_ERRORS.get(getLoginError(error))!);
+		}
+		finally {
+			preloader.hide();
 		}
 	}
 	return (
@@ -68,9 +76,12 @@ const LoginView = () => {
 						onChange={e => loginForm.setPassword(e.target.value)}
 					/>
 					<ErrorMessage error={errorLoginForm.value} />
-					<Button content="Iniciar sesión" disabled={loginForm.isValid} />
+					<Button 
+						adornment={<span className="fill"><UserIcon/></span>}
+						content="INICIAR SESSIÓN" disabled={loginForm.isValid} />
 				</form>
 			</LoginCard>
+			<Preloader preloader={preloader}/>
 		</CenteredLayout>
 	);
 };

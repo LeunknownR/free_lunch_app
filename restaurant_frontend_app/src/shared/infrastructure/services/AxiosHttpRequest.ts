@@ -11,9 +11,9 @@ export default class AxiosHttpRequest implements HttpRequest {
 		this.setInterceptors(getToken);
 	}
 	private setInterceptors(getToken: GetToken): void {
-		this.api.interceptors.response.use(res => {
-			res.headers["Authorization"] = `Bearer ${getToken()}`;
-			return res;
+		this.api.interceptors.request.use(req => {
+			req.headers.Authorization = `Bearer ${getToken()}`;
+			return req;
 		});
 	}
 	async get<RP>(
@@ -28,7 +28,7 @@ export default class AxiosHttpRequest implements HttpRequest {
 			payload: response.data,
 		};
 	}
-	async post<B, RP>(path: string, body: B): Promise<HttpResponse<RP>> {
+	async post<RP, B>(path: string, body?: B): Promise<HttpResponse<RP>> {
 		let response: HttpResponse<RP>;
 		try {
 			const result = await this.api.post(path, body);

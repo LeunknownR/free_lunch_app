@@ -18,6 +18,7 @@ export default class MySqlContext {
 			multipleStatements: true,
 			supportBigNumbers: true,
 			decimalNumbers: true,
+			timezone: "Z",
 			connectionLimit: parseInt(MYSQL_POOL_CONNECTIONS)
 		});
 	}

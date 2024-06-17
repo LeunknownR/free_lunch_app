@@ -8,6 +8,9 @@ export const Container = styled.tr`
 	--border-radius: 5px;
 	background-color: var(--secondary-color);
 	height: 50px;
+	* {
+		transition: 0.3s;
+	}
 `;
 export const TableDefinition = styled.td`
 	border: 0 solid var(--primary-color);

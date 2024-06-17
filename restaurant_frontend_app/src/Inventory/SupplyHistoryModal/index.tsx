@@ -4,7 +4,7 @@ import Table from "../../components/Table";
 import { SupplyHistoryHook } from "../hooks/useSupplyHistory";
 import TableSupplyHistoryRow from "./TableSupplyHistoryRow";
 import { SUPPLY_HISTORY_TABLE_HEADERS } from "./constants";
-import { Container } from "./styles";
+import { Container, ContainerTable } from "./styles";
 
 export type SupplyHistoryModalProps = {
 	supplyHistory: SupplyHistoryHook;
@@ -32,19 +32,21 @@ const SupplyHistoryModal = ({ supplyHistory }: SupplyHistoryModalProps) => {
 						alt={ingredient.label}
 					/>
 					{supplyHistory.value.length > 0 ? (
-						<Table headers={SUPPLY_HISTORY_TABLE_HEADERS}>
-							{supplyHistory.value.map(
-								(supplyHistoryRecord, index) => (
-									<TableSupplyHistoryRow
-										key={index}
-										index={index}
-										supplyHistoryRecord={
-											supplyHistoryRecord
-										}
-									/>
-								)
-							)}
-						</Table>
+						<ContainerTable>
+							<Table headers={SUPPLY_HISTORY_TABLE_HEADERS}>
+								{supplyHistory.value.map(
+									(supplyHistoryRecord, index) => (
+										<TableSupplyHistoryRow
+											key={index}
+											index={index}
+											supplyHistoryRecord={
+												supplyHistoryRecord
+											}
+										/>
+									)
+								)}
+							</Table>
+						</ContainerTable>
 					) : (
 						<GuideMessage>
 							No existen registros actualmente

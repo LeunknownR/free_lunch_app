@@ -1,5 +1,6 @@
 import TableBodyRow from "../../../components/Table/TableBodyRow";
 import { TableDefinition } from "../../../components/Table/TableBodyRow/styles";
+import { getDateTimeFormatted } from "../../../utils/date";
 import SupplyHistoryRecord from "../../domain/SupplyHistoryRecord";
 
 type TableSupplyHistoryRowProps = {
@@ -16,8 +17,8 @@ const TableSupplyHistoryRow = ({
 			<TableDefinition>
 				<span><strong>{quantity}</strong></span>
 			</TableDefinition>
-			<TableDefinition>
-				<span>{suppliedOn.toString()}</span>
+			<TableDefinition>			
+				<span>{getDateTimeFormatted(suppliedOn)}</span>
 			</TableDefinition>
 		</TableBodyRow>
 	);

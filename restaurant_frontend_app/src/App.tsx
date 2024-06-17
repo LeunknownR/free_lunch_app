@@ -9,13 +9,26 @@ import OrderView from "./Orders/OrderView";
 import InventoryView from "./Inventory/InventoryView";
 import useCurrentUserStorage from "./hooks/useCurrentUserStorage";
 import User from "./Login/domain/User";
+import FoodView from "./Food/FoodView";
+import Recipe from "./Food/domain/Recipe";
+import useRecipes from "./Food/hooks/useRecipes";
+import usePreloader from "./components/Preloader/hooks/usePreloader";
+import Preloader from "./components/Preloader";
+import Order from "./Orders/domain/Order";
+import useOrders from "./Orders/hooks/useOrders";
 
 const DashboardRoutes = () => {
+	const preloader = usePreloader();
 	const currentUser: User = useCurrentUserStorage();
+	const recipes: Recipe[] = useRecipes(preloader);
+	const orders: Order[] = useOrders();
 	return (
 		<AppContext.Provider
 			value={{
 				currentUser,
+				recipes,
+				orders,
+				preloader
 			}}
 		>
 			<Routes>
@@ -36,6 +49,14 @@ const DashboardRoutes = () => {
 					}
 				/>
 				<Route
+					path={AbsolutePaths.Food}
+					element={
+						<AuthenticatedRoute>
+							<FoodView />
+						</AuthenticatedRoute>
+					}
+				/>
+				<Route
 					path={AbsolutePaths.Inventory}
 					element={
 						<AuthenticatedRoute>
@@ -48,6 +69,7 @@ const DashboardRoutes = () => {
 					element={<NotFoundView />}
 				/>
 			</Routes>
+			<Preloader preloader={preloader}/>
 		</AppContext.Provider>
 	);
 };

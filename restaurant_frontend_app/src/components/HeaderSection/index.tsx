@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Container } from "./styles";
+import { Container, TitleSection } from "./styles";
 
 export type HeaderSectionProps = {
 	title: string; 
@@ -10,7 +10,7 @@ const HeaderSection = ({
 }: HeaderSectionProps) => {
 	return (
 		<Container>
-			<h2>{title}</h2>
+			<TitleSection>{title}</TitleSection>
 			<p>{description}</p>
 		</Container>
 	);

@@ -4,5 +4,5 @@ export type HttpResponse<P> = {
 };
 export default interface HttpRequest {
 	get<RP>(path: string, queryParams?: Record<string, string | number | boolean>): Promise<HttpResponse<RP>>;
-	post<B, RP>(path: string, body: B): Promise<HttpResponse<RP>>;
+	post<RP, B>(path: string, body?: B): Promise<HttpResponse<RP>>;
 }

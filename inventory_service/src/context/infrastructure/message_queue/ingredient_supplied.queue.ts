@@ -16,6 +16,7 @@ export default async function onIngredientSuppliedQueue() {
 			queueContext.ingredientsDistributedQueue
 		);
 		distributeIngredientsUseCase.invoke(new OrderId(orderId));
+		if (leftOverIngredients.length === 0) return;
 		const supplyIngredientsUseCase = new SupplyIngredientsUseCase(
 			new MySqlInventoryRepository(
 				MySqlContextProvider.getInventoryDatabase()

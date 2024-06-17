@@ -32,10 +32,7 @@ export default class SupplyIngredientsUseCase {
 	private async attendIngredientOrder(
 		ingredient: Ingredient
 	): Promise<Ingredient | null> {
-		let i = 0;
 		while (true) {
-			if (i === 20) 
-				throw new Error("While not finish");
 			const quantitySold = await this.buyIngredients(
 				ingredient.id
 			);

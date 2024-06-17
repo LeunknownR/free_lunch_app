@@ -5,6 +5,6 @@ import OrderSaved from "./OrderSaved";
 export default interface OrderRepository {
 	getAllOrders(): Promise<OrderSaved[]>;
 	createOrder(order: Order): Promise<void>;
-	findOrder(orderId: OrderId): Promise<Order>;
-	updateOrderStatus(order: Order): Promise<void>;
+	findOrder(orderId: OrderId): Promise<OrderSaved>;
+	updateOrderStatus(order: OrderSaved): Promise<void>;
 }

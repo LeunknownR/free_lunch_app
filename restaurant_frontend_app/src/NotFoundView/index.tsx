@@ -1,7 +1,9 @@
+import useTitle from "../hooks/useTitle";
 import CenteredLayout from "../layout/CenteredLayout";
 import "./styles.css";
 
 const NotFoundView = () => {
+	useTitle("Página no encontrada");
 	return (
 		<CenteredLayout>
 			<section id="section-404">

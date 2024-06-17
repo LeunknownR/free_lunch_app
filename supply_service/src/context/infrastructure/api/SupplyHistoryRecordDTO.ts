@@ -4,11 +4,11 @@ export default class SupplyHistoryRecordDTO {
 	//#region Attributes
 	id: string;
 	quantity: number;
-	suppliedOn: Date;
+	suppliedOn: string;
 	//#endregion
 	constructor(supplyHistoryRecord: SupplyHistoryRecord) {
 		this.id = supplyHistoryRecord.id;
 		this.quantity = supplyHistoryRecord.quantity.value;
-		this.suppliedOn = supplyHistoryRecord.suppliedOn;
+		this.suppliedOn = supplyHistoryRecord.suppliedOn.toISOString();
 	}
 }

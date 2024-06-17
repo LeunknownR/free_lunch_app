@@ -1,7 +1,8 @@
 enum AbsolutePaths {
 	Login = "/login",
-	Orders = "/orders",
-	Inventory = "/inventory"
+	Orders = "/pedidos",
+	Food = "/pedidos/comida",
+	Inventory = "/inventario"
 }
 
 export default AbsolutePaths;

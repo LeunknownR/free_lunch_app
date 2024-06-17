@@ -12,6 +12,7 @@ import QueueContext from "../../shared/message_queue/QueueContext";
 import RequestIngredientsUseCase from "../../application/RequestIngredientsUseCase";
 import CreateOrderUseCase from "../../application/CreateOrderUseCase";
 import OrderSaved from "../../domain/orders/OrderSaved";
+import SocketIoServer from "../../../shared/infrastructure/websockets/SocketIoServer";
 
 const router = Router();
 
@@ -38,7 +39,8 @@ router.post("/", async (_, res) => {
 		const oneRecipe: Recipe = await getOneRecipeUseCase.invoke();
 		
 		const createOrderUseCase = new CreateOrderUseCase(
-			new MongoDBOrderRepository(orderDatabase)
+			new MongoDBOrderRepository(orderDatabase),
+			SocketIoServer.getInstance()
 		);
 		const orderCreated: Order = await createOrderUseCase.invoke(oneRecipe);
 

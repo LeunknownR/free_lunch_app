@@ -3,6 +3,7 @@ import useModal, { ModalHook } from "../../components/Modal/hooks/useModal";
 import Ingredient from "../domain/Ingredient";
 import RepositoryProvider from "../../shared/infrastructure/persistence/RepositoryProvider";
 import SupplyHistoryRecord from "../domain/SupplyHistoryRecord";
+import useAppContext from "../../context/useAppContext";
 
 export type SupplyHistoryHook = {
     modal: ModalHook;
@@ -12,6 +13,7 @@ export type SupplyHistoryHook = {
 };
 const supplyRepository = RepositoryProvider.getSupplyRepository();
 const useSupplyHistory = (): SupplyHistoryHook => {
+	const { preloader } = useAppContext();
 	const modal = useModal();
 	const [ingredient, setIngredient] = useState<Ingredient | null>(null);
 	const [supplyHistory, setSupplyHistory] = useState<SupplyHistoryRecord[]>([]);
@@ -20,8 +22,9 @@ const useSupplyHistory = (): SupplyHistoryHook => {
 			fillSupplyHistory(ingredient.id);
 	}, [ingredient]);
 	async function fillSupplyHistory(ingredientId: string) {
+		preloader.show();
 		const data = await supplyRepository.getSupplyHistory(ingredientId);
-		console.log(data);
+		preloader.hide();
 		setSupplyHistory(data);
 	}
 	function viewHistory(ingredient: Ingredient): void {

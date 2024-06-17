@@ -1,16 +1,18 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { Container } from "./styles";
 
 type ButtonProps = {
 	content: string;
+	adornment?: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
-const Button = ({ content, ...restProps }: ButtonProps) => {
+const Button = ({ adornment, content, ...restProps }: ButtonProps) => {
 	return (
 		<Container
 			{...restProps}
 			className="button"
 		>
-			{content}
+			{adornment}
+			<div>{content}</div>
 		</Container>
 	);
 };

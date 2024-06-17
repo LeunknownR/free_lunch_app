@@ -8,16 +8,22 @@ import Ingredient from "./domain/Ingredient";
 import { INGREDIENT_TABLE_HEADERS } from "./constants";
 import SupplyHistoryModal from "./SupplyHistoryModal";
 import useSupplyHistory from "./hooks/useSupplyHistory";
+import useTitle from "../hooks/useTitle";
+import useAppContext from "../context/useAppContext";
 
 const inventoryRepository = RepositoryProvider.getInventoryRepository();
 const InventoryView = () => {
+	useTitle("Inventario");
+	const { preloader } = useAppContext();
 	const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 	const supplyHistory = useSupplyHistory();
 	useEffect(() => {
 		fillIngredients();
 	}, []);
 	async function fillIngredients() {
+		preloader.show();
 		const data = await inventoryRepository.getAllIngredients();
+		preloader.hide();
 		setIngredients(data);
 	}
 	return (

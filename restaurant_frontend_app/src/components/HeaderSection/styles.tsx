@@ -4,11 +4,10 @@ import styled from "styled-components";
 
 export const Container = styled.header`
 	width: 100%;
-	h2 {
-		color: var(--dark-primary);
-		margin-bottom: 10px;
-	}
 	p {
 		color: var(--dark-secondary);
 	}
+`;
+export const TitleSection = styled.h2`
+	color: var(--dark-primary);
 `;

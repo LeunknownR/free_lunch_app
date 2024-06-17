@@ -29,7 +29,7 @@ export default class MySqlSupplyRepository implements SupplyRepository {
 	): Promise<void> {
 		const { id, ingredientId, quantity, suppliedOn } = supplyHistoryRecord;
 		this.supplyDatabase.query(
-			"INSERT INTO supply_history(id, ingredient_id, quantity, supplied_on) VALUES (?, ?, ?, ?, ?);",
+			"INSERT INTO supply_history(id, ingredient_id, quantity, supplied_on) VALUES (?, ?, ?, ?);",
 			[id, ingredientId, quantity.value, suppliedOn]
 		);
 	}

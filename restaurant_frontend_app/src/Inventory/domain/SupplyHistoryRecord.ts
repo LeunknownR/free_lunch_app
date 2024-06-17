@@ -1,7 +1,7 @@
 type SupplyHistoryRecord = {
 	id: string;
 	quantity: number;
-	suppliedOn: Date;
+	suppliedOn: string;
 };
 
 export default SupplyHistoryRecord;

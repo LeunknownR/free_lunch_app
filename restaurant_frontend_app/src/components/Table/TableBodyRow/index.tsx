@@ -2,14 +2,15 @@ import { ReactNode } from "react";
 import { Container, TableDefinition } from "./styles";
 
 export type TableBodyRowProps = {
+	className?: string;
 	order: number;
 	children: ReactNode;
 };
 const TableBodyRow = ({
-	order, children
+	className, order, children
 }: TableBodyRowProps) => {
 	return (
-		<Container>
+		<Container className={className}>
 			<TableDefinition>
 				<span>{order}</span>
 			</TableDefinition>

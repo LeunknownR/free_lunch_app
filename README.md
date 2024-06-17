@@ -36,6 +36,7 @@ Aplicación de gestión de una **jornada de almuerzos gratis**, construida utili
 * Hot reloading: **nodemon**.
 * Hot reloading con TypeScript: **ts-node-dev**.
 * Compilación de TypeScript: **typescript**.
+* Comunicación en tiempo real entre clientes y un servidor: **socket.io**
 
 ## Arquitectura de la aplicación
 
@@ -112,13 +113,22 @@ SINO
 ## Instrucciones
 
 1. Construimos las imágenes.
-`
+```
 docker-compose build
-`
+```
 2. Iniciamos los contenedores.
-`
+```
 docker-compose up
-`
+```
+
+## Credenciales
+
+Se puede iniciar sesión en la aplicación con estas credenciales:
+
+```txt
+username = mrivera
+password = Mrivera_123
+```
 
 ## Documentación de servicios
 

@@ -10,7 +10,7 @@ export default class AxiosProvider {
 	static getBackendAPI(): AxiosHttpRequest {
 		if (!AxiosProvider.instance)
 			AxiosProvider.instance = new AxiosHttpRequest(
-				import.meta.env.VITE_BACKEND_API_URL,
+				`http://${window.location.hostname}:${import.meta.env.VITE_BACKEND_PORT}`,
 				() => userTokenStorage.get()
 			);
 		return AxiosProvider.instance;
