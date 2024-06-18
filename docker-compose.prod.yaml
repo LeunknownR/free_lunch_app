@@ -50,7 +50,7 @@ services:
     restart: unless-stopped
     build:
       context: ./api_gateway
-      target: development
+      target: production
     env_file:
       - ./api_gateway/.env
     environment:
@@ -75,7 +75,7 @@ services:
     restart: unless-stopped
     build:
       context: ./auth_service
-      target: development
+      target: production
     env_file:
       - ./auth_service/.env
     environment:
@@ -96,7 +96,7 @@ services:
     restart: unless-stopped
     build:
       context: ./kitchen_service
-      target: development
+      target: production
     env_file:
       - ./kitchen_service/.env
     environment:
@@ -118,7 +118,7 @@ services:
     restart: unless-stopped
     build:
       context: ./inventory_service
-      target: development
+      target: production
     env_file:
       - ./inventory_service/.env
     environment:
@@ -140,7 +140,7 @@ services:
     restart: unless-stopped
     build:
       context: ./supply_service
-      target: development
+      target: production
     env_file:
       - ./supply_service/.env
     environment:
@@ -161,7 +161,7 @@ services:
     container_name: restaurant_frontend_app
     build:
       context: ./restaurant_frontend_app
-      target: development
+      target: production
     environment:
       - PORT=${RESTAURANT_FRONTEND_APP_PORT}
     ports:
@@ -174,10 +174,6 @@ services:
       - ./shared:/usr/share/docker
     depends_on:
       - api_gateway
-      - auth_service
-      - kitchen_service
-      - inventory_service
-      - supply_service
 
 networks:
   free_lunch_app:

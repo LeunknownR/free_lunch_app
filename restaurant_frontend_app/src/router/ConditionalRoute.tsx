@@ -18,7 +18,7 @@ const ConditionalRoute = ({
 		else navigate(to);
 	}, []);
 	if (!proceed) return null;
-	return children;
+	return <>{children}</>;
 };
 
 export default ConditionalRoute;

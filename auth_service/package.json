@@ -5,8 +5,8 @@
   "type": "commonjs",
   "main": "./dist/app.js",
   "scripts": {
-    "start": "nodemon -L ./src/app.ts",
-    "build": "tsc"
+    "dev": "nodemon -L ./src/app.ts",
+    "prod": "tsc && node ./dist/app.js"
   },
   "keywords": [],
   "author": "Manuel Rivera",

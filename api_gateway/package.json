@@ -5,7 +5,8 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon -L ./src/app.js"
+    "dev": "nodemon -L ./src/app.js",
+    "prod": "node ./src/app.js"
   },
   "keywords": [],
   "author": "Manuel Rivera",

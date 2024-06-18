@@ -4,30 +4,30 @@ Aplicación de gestión de una **jornada de almuerzos gratis**, construida utili
 
 ## Tecnologías utilizadas
 
-## Diseño UI
+#### Diseño UI
 
 * Figma.
 
-### Bases de datos
+#### Bases de datos
 
 * MySQL.
 * MongoDB.
 
-### Entornos de ejecución
+#### Entornos de ejecución
 
 * Node JS.
 * Node JS con TypeScript.
 
-### Cola de mensajería
+#### Cola de mensajería
 
 * RabbitMQ.
 
-### Contenerización
+#### Contenerización
 
 * Docker.
 * Docker Compose.
 
-### Librerías / Bibliotecas utilizadas
+#### Librerías / Bibliotecas utilizadas
 
 * Desarrollo frontend: **reactjs**.
 * Driver para conectarse a bases de datos MongoDB: **mongoose**.
@@ -40,7 +40,7 @@ Aplicación de gestión de una **jornada de almuerzos gratis**, construida utili
 * Hot reloading: **nodemon**.
 * Hot reloading con TypeScript: **ts-node-dev**.
 * Compilación de TypeScript: **typescript**.
-* Comunicación en tiempo real entre clientes y un servidor: **socket.io**
+* Comunicación en tiempo real entre cliente y servidor: **socket.io**
 
 ## Arquitectura de la aplicación
 
@@ -116,20 +116,24 @@ SINO
 
 ## Instrucciones
 
-1. Construimos las imágenes.
+1. Iniciamos los contenedores.
+
+* En desarrollo:
 ```
-docker-compose build
+docker-compose up --build
 ```
-2. Iniciamos los contenedores.
+* En producción:
 ```
-docker-compose up
+docker-compose -f docker-compose.prod.yaml up --build
 ```
+
 
 ## Credenciales
 
 Se puede iniciar sesión en la aplicación con estas credenciales:
 
 ```txt
+* Manuel Rivera *
 username = mrivera
 password = Mrivera_123
 ```
