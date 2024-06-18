@@ -28,7 +28,7 @@ const DashboardRoutes = () => {
 				currentUser,
 				recipes,
 				orders,
-				preloader
+				preloader,
 			}}
 		>
 			<Routes>
@@ -69,7 +69,7 @@ const DashboardRoutes = () => {
 					element={<NotFoundView />}
 				/>
 			</Routes>
-			<Preloader preloader={preloader}/>
+			<Preloader preloader={preloader} />
 		</AppContext.Provider>
 	);
 };

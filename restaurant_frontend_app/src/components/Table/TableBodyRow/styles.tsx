@@ -2,20 +2,16 @@
 import styled from "styled-components";
 //#endregion
 
-export const Container = styled.tr`
-	--primary-color: var(--dark-secondary);
-	--secondary-color: var(--light);
-	--border-radius: 5px;
-	background-color: var(--secondary-color);
-	height: 50px;
-	* {
-		transition: 0.3s;
-	}
+export const TableBodyCellWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 15px;
 `;
 export const TableDefinition = styled.td`
-	border: 0 solid var(--primary-color);
+	border: 0 solid var(--dark-secondary);
 	border-top-width: 1px;
 	border-bottom-width: 1px;
+	transition: 0.2s;
 	:first-child {
 		border-left-width: 1px;
 	}
@@ -35,7 +31,8 @@ export const TableDefinition = styled.td`
 		border-bottom-right-radius: var(--border-radius);
 	}
 	* {
-		color: var(--primary-color);
+		color: var(--dark-secondary);
+		transition: 0.2s;
 	}
 	img {
 		width: 65px;
@@ -43,8 +40,9 @@ export const TableDefinition = styled.td`
 		object-fit: cover;
 	}
 `;
-export const TableBodyCellWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 15px;
+export const Container = styled.tr`
+	--border-radius: 5px;
+	background-color: var(--light);
+	height: 50px;
+	transition: 0.2s;
 `;
