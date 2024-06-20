@@ -5,10 +5,11 @@ import GetAllRecipesUseCase from "../../application/GetAllRecipesUseCase";
 import MongoDBRecipeRepository from "../persistence/MongoDBRecipeRepository";
 import Recipe from "../../domain/recipes/Recipe";
 import RecipeDTO from "./RecipeDTO";
+import withErrorHandler from "../../../shared/infrastructure/api/withErrorHandler";
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.get("/", withErrorHandler(async (_, res) => {
 	const orderDatabase = await MongoDBContextProvider.getOrderDatabase();
 	const getAllRecipesUseCase = new GetAllRecipesUseCase(
 		new MongoDBRecipeRepository(orderDatabase)
@@ -20,7 +21,7 @@ router.get("/", async (_, res) => {
 		},
 		message: "SUCCESS",
 	});
-});
+}));
 
 const serviceRouter: ServiceRouter = {
 	path: "/recipes",

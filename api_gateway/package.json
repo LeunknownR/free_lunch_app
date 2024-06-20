@@ -1,7 +1,7 @@
 {
   "name": "free_lunch_day_backend_api_gateway",
   "version": "1.0.0",
-  "description": "API gateway para exponer los servicios del backend.",
+  "description": "API Gateway para exponer los servicios del backend.",
   "type": "module",
   "main": "app.js",
   "scripts": {

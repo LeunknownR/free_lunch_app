@@ -5,10 +5,11 @@ import MySqlInventoryRepository from "../persistence/MySqlInventoryRepository";
 import IngredientDTO from "./IngredientDTO";
 import Ingredient from "../../domain/Ingredient";
 import ServiceRouter from "../../../shared/infrastructure/api/ServiceRouter";
+import withErrorHandler from "../../../shared/infrastructure/api/withErrorHandler";
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.get("/", withErrorHandler(async (_, res) => {
 	const getAllIngredientsUseCase = new GetAllIngredientsUseCase(
 		new MySqlInventoryRepository(MySqlContextProvider.getInventoryDatabase())
 	);
@@ -22,7 +23,7 @@ router.get("/", async (_, res) => {
 		},
 		message: "SUCCESS",
 	});
-});
+}));
 
 const serviceRouter: ServiceRouter = {
 	path: "/ingredients",

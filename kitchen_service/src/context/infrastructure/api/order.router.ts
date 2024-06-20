@@ -13,10 +13,11 @@ import RequestIngredientsUseCase from "../../application/RequestIngredientsUseCa
 import CreateOrderUseCase from "../../application/CreateOrderUseCase";
 import OrderSaved from "../../domain/orders/OrderSaved";
 import SocketIoServer from "../../../shared/infrastructure/websockets/SocketIoServer";
+import withErrorHandler from "../../../shared/infrastructure/api/withErrorHandler";
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.get("/", withErrorHandler(async (_, res) => {
 	const orderDatabase = await MongoDBContextProvider.getOrderDatabase();
 	const getAllOrdersUseCase = new GetAllOrdersUseCase(
 		new MongoDBOrderRepository(orderDatabase)
@@ -28,9 +29,9 @@ router.get("/", async (_, res) => {
 		},
 		message: "SUCCESS",
 	});
-});
+}));
 
-router.post("/", async (_, res) => {
+router.post("/", withErrorHandler(async (_, res) => {
 	try {
 		const orderDatabase = await MongoDBContextProvider.getOrderDatabase();
 		const getOneRecipeUseCase = new GetOneRecipeUseCase(
@@ -61,7 +62,7 @@ router.post("/", async (_, res) => {
 			message: "ERROR",
 		});
 	}
-});
+}));
 
 const serviceRouter: ServiceRouter = {
 	path: "/orders",

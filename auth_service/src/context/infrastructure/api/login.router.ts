@@ -10,10 +10,11 @@ import LoginError from "../../domain/LoginError";
 import ResponseLoginDTO, { UserDTO } from "./ResponseLoginDTO";
 import UserUsername from "../../domain/UserUsername";
 import UserPassword from "../../domain/UserPassword";
+import withErrorHandler from "../../../shared/infrastructure/api/withErrorHandler";
 
 const router = Router();
 
-router.post("/", async (req: UserLoginRequest, res) => {
+router.post("/", withErrorHandler(async (req: UserLoginRequest, res) => {
 	try {
 		const loginUseCase = new LoginUseCase(
 			new MySqlUserRepository(MySqlContextProvider.getUserDatabase()),
@@ -32,18 +33,19 @@ router.post("/", async (req: UserLoginRequest, res) => {
 			),
 		});
 	} catch (error) {
-		if (error instanceof LoginError)
+		if (error instanceof LoginError) {
 			res.status(400).json({
 				message: error.message,
 				data: null,
 			});
-		else
-			res.status(500).json({
-				message: "UNEXPECTED_ERROR",
-				data: null,
-			});
+			return;
+		}
+		res.status(500).json({
+			message: process.env.NODE_ENV === "development" ? error : "UNEXPECTED_ERROR",
+			data: null,
+		});
 	}
-});
+}));
 
 const serviceRouter: ServiceRouter = {
 	path: "/login",

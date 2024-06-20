@@ -159,6 +159,7 @@ services:
 
   restaurant_frontend_app: 
     container_name: restaurant_frontend_app
+    restart: unless-stopped
     build:
       context: ./restaurant_frontend_app
       target: development

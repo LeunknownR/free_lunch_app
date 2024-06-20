@@ -6,10 +6,11 @@ import SupplyHistoryRecord from "../../domain/SupplyHistoryRecord";
 import SupplyHistoryRecordDTO from "./SupplyHistoryRecordDTO";
 import ServiceRouter from "../../../shared/infrastructure/api/ServiceRouter";
 import IngredientId from "../../domain/IngredientId";
+import withErrorHandler from "../../../shared/infrastructure/api/withErrorHandler";
 
 const router = Router();
 
-router.get("/:ingredientId", async (req, res) => {
+router.get("/:ingredientId", withErrorHandler(async (req, res) => {
 	const getAllIngredientsUseCase = new GetSupplyHistoryUseCase(
 		new MySqlSupplyRepository(MySqlContextProvider.getSupplyDatabase())
 	);
@@ -23,7 +24,7 @@ router.get("/:ingredientId", async (req, res) => {
 		},
 		message: "SUCCESS",
 	});
-});
+}));
 
 const serviceRouter: ServiceRouter = {
 	path: "/history",
