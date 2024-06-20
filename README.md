@@ -120,11 +120,11 @@ SINO
 
 * En desarrollo:
 ```
-docker-compose up --build
+docker-compose up --build -d
 ```
 * En producción:
 ```
-docker-compose -f docker-compose.prod.yaml up --build
+docker-compose -f docker-compose.prod.yaml up --build -d
 ```
 
 
