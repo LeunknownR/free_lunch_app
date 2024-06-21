@@ -1,0 +1,1 @@
+{"version":3,"file":"IngredientLabel.js","sourceRoot":"","sources":["../../../src/context/domain/IngredientLabel.ts"],"names":[],"mappings":";;;;;AAAA,sEAA8C;AAE9C,MAAqB,eAAe;IAEnC,YAAY,KAAa;QACxB,IAAI,CAAC,KAAK;YACT,MAAM,IAAI,wBAAc,CAAC,0BAA0B,CAAC,CAAC;QACtD,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;IACpB,CAAC;CACD;AAPD,kCAOC"}

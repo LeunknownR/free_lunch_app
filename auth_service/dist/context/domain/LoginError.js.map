@@ -1,0 +1,1 @@
+{"version":3,"file":"LoginError.js","sourceRoot":"","sources":["../../../src/context/domain/LoginError.ts"],"names":[],"mappings":";;AAAA,MAAqB,UAAW,SAAQ,KAAK;IAEzC,YAAoB,KAAa;QAC7B,KAAK,CAAC,KAAK,CAAC,CAAC;IACjB,CAAC;IACD,MAAM,CAAC,kBAAkB;QACrB,OAAO,IAAI,UAAU,CAAC,UAAU,CAAC,mBAAmB,CAAC,CAAA;IACzD,CAAC;;AANe,8BAAmB,GAAW,qBAAqB,CAAA;kBADlD,UAAU"}

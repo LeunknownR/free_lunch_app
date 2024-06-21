@@ -87,6 +87,7 @@ services:
       - ./shared:/usr/share/docker
       - ./auth_service:/usr/app
       - ./auth_service/node_modules:/usr/app/node_modules
+      - ./auth_service/dist:/usr/app/dist
     depends_on:
       mysql:
         condition: service_started
@@ -107,6 +108,7 @@ services:
       - ./shared:/usr/share/docker
       - ./kitchen_service:/usr/app
       - ./kitchen_service/node_modules:/usr/app/node_modules
+      - ./kitchen_service/dist:/usr/app/dist
     depends_on:
       mongodb:
         condition: service_started
@@ -127,6 +129,7 @@ services:
       - ./shared:/usr/share/docker
       - ./inventory_service:/usr/app
       - ./inventory_service/node_modules:/usr/app/node_modules
+      - ./inventory_service/dist:/usr/app/dist
     networks:
       - free_lunch_app
     depends_on:
@@ -149,6 +152,7 @@ services:
       - ./shared:/usr/share/docker
       - ./supply_service:/usr/app
       - ./supply_service/node_modules:/usr/app/node_modules
+      - ./supply_service/dist:/usr/app/dist
     networks:
       - free_lunch_app
     depends_on:
@@ -170,9 +174,10 @@ services:
     networks:
       - free_lunch_app
     volumes:
+      - ./shared:/usr/share/docker
       - ./restaurant_frontend_app:/usr/app
       - ./restaurant_frontend_app/node_modules:/usr/app/node_modules
-      - ./shared:/usr/share/docker
+      - ./restaurant_frontend_app/dist:/usr/share/nginx/html
     depends_on:
       - api_gateway
 

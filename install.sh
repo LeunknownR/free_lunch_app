@@ -1,0 +1,12 @@
+cd ./api_gateway
+npm i
+cd ../auth_service
+npm i
+cd ../inventory_service
+npm i
+cd ../supply_service
+npm i
+cd ../kitchen_service
+npm i
+cd ../restaurant_app_frontend
+npm i

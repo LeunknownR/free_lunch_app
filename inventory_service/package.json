@@ -6,7 +6,7 @@
   "main": "./dist/app.js",
   "scripts": {
     "dev": "nodemon -L ./src/app.ts",
-    "prod": "tsc && node ./dist/app.js"
+    "prod": "node ./dist/app.js"
   },
   "keywords": [],
   "author": "Manuel Rivera",
