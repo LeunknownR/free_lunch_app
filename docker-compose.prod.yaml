@@ -2,7 +2,7 @@ version: '3.1'
 services:
   rabbitmq:
     container_name: rabbitmq
-    restart: unless-stopped
+    restart: always
     image: rabbitmq:3.10-rc-management-alpine
     environment:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
@@ -16,7 +16,7 @@ services:
 
   mysql:
     container_name: mysql
-    restart: unless-stopped
+    restart: always
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD_ROOT}
@@ -47,7 +47,7 @@ services:
         
   api_gateway:
     container_name: api_gateway
-    restart: unless-stopped
+    restart: always
     build:
       context: ./api_gateway
       target: production
@@ -72,7 +72,7 @@ services:
 
   auth_service:
     container_name: auth_service
-    restart: unless-stopped
+    restart: always
     build:
       context: ./auth_service
       target: production
@@ -94,7 +94,7 @@ services:
 
   kitchen_service:
     container_name: kitchen_service
-    restart: unless-stopped
+    restart: always
     build:
       context: ./kitchen_service
       target: production
@@ -117,7 +117,7 @@ services:
 
   inventory_service:
     container_name: inventory_service
-    restart: unless-stopped
+    restart: always
     build:
       context: ./inventory_service
       target: production
@@ -140,7 +140,7 @@ services:
 
   supply_service:
     container_name: supply_service
-    restart: unless-stopped
+    restart: always
     build:
       context: ./supply_service
       target: production
@@ -163,7 +163,7 @@ services:
 
   restaurant_frontend_app: 
     container_name: restaurant_frontend_app
-    restart: unless-stopped
+    restart: always
     build:
       context: ./restaurant_frontend_app
       target: production
