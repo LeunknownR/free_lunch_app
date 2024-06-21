@@ -10,7 +10,9 @@ export default class MongoDBContext {
 	//#region Methods
 	protected static async getNewConnection(databaseName: string): Promise<Connection> {
 		const context = await mongoose
-			.createConnection(this.getConnectionString(databaseName))
+			.createConnection(this.getConnectionString(databaseName), {
+				family: 4
+			})
 			.asPromise();
 		return context;
 	}

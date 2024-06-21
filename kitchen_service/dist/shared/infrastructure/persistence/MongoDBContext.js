@@ -42,7 +42,9 @@ class MongoDBContext {
     static getNewConnection(databaseName) {
         return __awaiter(this, void 0, void 0, function* () {
             const context = yield mongoose_1.default
-                .createConnection(this.getConnectionString(databaseName))
+                .createConnection(this.getConnectionString(databaseName), {
+                family: 4
+            })
                 .asPromise();
             return context;
         });

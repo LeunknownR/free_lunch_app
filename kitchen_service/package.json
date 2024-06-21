@@ -6,6 +6,7 @@
   "main": "./dist/app.js",
   "scripts": {
     "dev": "nodemon -L ./src/app.ts",
+    "build": "tsc",
     "prod": "node ./dist/app.js"
   },
   "keywords": [],
