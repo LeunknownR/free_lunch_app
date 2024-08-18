@@ -37,7 +37,7 @@ export default class SupplyIngredientsUseCase {
 				ingredient.id
 			);
 			if (quantitySold === 0) 
-				return;
+				continue;
 			this.recordSupply(ingredient, quantitySold);
 			const leftOverQuantity = ingredient.quantity.supply(quantitySold);
 			if (leftOverQuantity > 0)

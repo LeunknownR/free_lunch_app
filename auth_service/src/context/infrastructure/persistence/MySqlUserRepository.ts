@@ -8,10 +8,10 @@ import UserSurname from "../../domain/UserSurname";
 import UserUsername from "../../domain/UserUsername";
 
 export default class MySqlUserRepository implements UserRepository {
-    constructor(private readonly inventoryDatabase: MySqlContext) { }
+    constructor(private readonly userDatabase: MySqlContext) { }
     //#region Methods
     async getUserByUsername(username: UserUsername): Promise<User | null> {
-        const result = await this.inventoryDatabase.query(
+        const result = await this.userDatabase.query(
             "SELECT * FROM user WHERE username = ?;",
             [username.value]
         );
@@ -24,7 +24,6 @@ export default class MySqlUserRepository implements UserRepository {
             new UserName(record["name"]),
             new UserSurname(record["surname"])
         );
-
     }
     //#endregion
 }

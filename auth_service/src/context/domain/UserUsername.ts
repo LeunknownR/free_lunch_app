@@ -1,6 +1,5 @@
 import UserError from "./UserError";
 
-
 export default class UserUsername {
     readonly value: string;
     constructor(value: string) {
